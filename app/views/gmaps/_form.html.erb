@@ -1,0 +1,17 @@
+<%= form_for(@gmap) do |f| %>
+  <% if @gmap.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gmap.errors.count, "error") %> prohibited this gmap from being saved:</h2>
+
+      <ul>
+      <% @gmap.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

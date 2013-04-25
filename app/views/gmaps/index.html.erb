@@ -1,0 +1,13 @@
+<% content_for :head do %>
+  <%= render partial: 'map_javascript' %>
+<% end %>
+
+<h1>Map</h1>
+
+<div id="gmap" style="width: 800px; height: 500px; margin: auto; background-color: black">
+  This is where the map will soon appear.
+</div>
+
+<br />
+
+<%= link_to 'New Gmap', new_gmap_path %>

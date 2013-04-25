@@ -1,0 +1,51 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyD6GIMag-JAtxYedhLcm59Ztl951Mz2650&sensor=false"></script>
+  <script type="text/javascript">
+    function initialize() {
+      var myLatLng = new google.maps.LatLng(-34.379, 150.644);
+      var mapOptions = {
+        center: myLatLng,
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      };
+      var map = new google.maps.Map(document.getElementById("gmap"), mapOptions);
+      
+      var marker = new google.maps.Marker({
+        position: map.getCenter(),
+        map: map,
+        title: 'Click to zoom'
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        map.setZoom(10);
+        map.setCenter(marker.getPosition());
+      });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: 'Change the zoom level',
+        position: marker.getPosition()
+      });
+      
+      google.maps.event.addListener(map, 'zoom_changed', function() {
+        var zoomLevel = map.getZoom();
+        map.setCenter(marker.getPosition());
+        infowindow.setContent('Zoom: ' + zoomLevel);
+        infowindow.open(map);
+      });
+      
+      
+      var southWest = new google.maps.LatLng(-35.000, 149.000);
+      var northEast = new google.maps.LatLng(-33.000, 151.000);
+      var width = northEast.lng() - southWest.lng();
+      var height = northEast.lat() - southWest.lat();
+      for (var i = 0; i < 5; i++) {
+        var location = new google.maps.LatLng(southWest.lat() + height * Math.random(), southWest.lng() + width * Math.random());
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        var j = i + 1;
+        marker.setTitle(j.toString());
+      }
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
